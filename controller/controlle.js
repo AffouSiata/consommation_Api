@@ -1,5 +1,9 @@
+const express = require("express");
 const { connect } = require("../database/db");
 const data = require("../modele/requete");
+let { jwt } = require("jsonwebtoken");
+
+
 
 
 
@@ -73,21 +77,6 @@ const control = class{
         })
         // console.log('rrrrrrrr',req.body);
        
-    }
-    static token =(req=request,res=response)=>{
-        if(req.body.nom_livre == "la chevre" && req.body.nom_categories == "roman") {
-            let token = jwt.sign({nom_livre : req.body.nom_livre},"anNvbnRva2Vu");  
-            console.log(token);
-            res.redirect('/')   
-       }
-       else{
-           res.status(401 ).json({message: "nom du livre et de la categories incorrect  "})
-       }
-
-       exports.test=(req,res)=>{
-        res.status(200).json({message: "vous etes bien authentifié avec l' id :" .req.token.id})
-    }
-    
     }
 
 

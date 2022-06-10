@@ -1,24 +1,32 @@
-const jwt = require('jsonwebtoken');
+const jwt  = require ( 'jsonwebtoken' ) ;
 
 
-exports.verifi=(req,res,next)=>{
-    
+
+const  authenticateJWT =class{
+
+    static creetoken = (data)=>{
+        let users = {...data}
+       
+            let token = jwt.sign(users,"anNvbnRva2Vu");  
+            console.log(token);
+            return token
+    }
+
+    static authen =(token)=>{
+        console.log("validetoken",token);
+        try  {
+            
+           const verification =   jwt.verify(token, "anNvbnRva2Vu") 
+           console.log("token verifie",verification);
+           return verification;
+                  
+        } catch(error) {
+            console.log("token invalid",error)
+            return res.status(401).json({
+                message:"token invalid"
+            })
+        }
+
+    }
 }
-// function authenticateToken(req, res, next) {
-//     const authHeader = req.headers['authorization']
-//     const token = authHeader && authHeader.split(' ')[1]
-  
-//     if (token == null) return res.sendStatus(401)
-  
-//     jwt.verify(token, process.env.TOKEN_SECRET as string, (err: any, user: any) => {
-//       console.log(err)
-  
-//       if (err) return res.sendStatus(403)
-  
-//       req.user = user
-  
-//       next()
-//     })
-// }
-
-
+module.exports = authenticateJWT;

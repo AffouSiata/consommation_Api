@@ -31,6 +31,9 @@ const data = class{
             }
         })
     }
+
+
+
     static selection =()=>{
 
         return new Promise((resolve,reject)=>{
@@ -48,6 +51,7 @@ const data = class{
         })
        
     }
+
     static selectionCat =()=>{
 
         return new Promise((resolve,reject)=>{
@@ -65,6 +69,7 @@ const data = class{
         })
        
     }
+
     static modifie_livres = (modifi)=>{
         let {nom_livre, nom_auteur_livre ,date_ajout,id_categorie,id}=modifi
         return new Promise((resolve,reject)=>{
@@ -134,6 +139,37 @@ const data = class{
             })
     
         })
+    }
+
+    static insertion_user= (data)=>{
+        let {nom_user,email_user}=data;
+        let apikey = "azerty";
+        console.log("dddddd",data);
+            let requet = "INSERT INTO users ( nom_user , email_user,apikey_user)VALUES(?,?,?)";
+            connect.query(requet,[nom_user,email_user,apikey],function(error,resultat){
+                if(error){
+                    console.log("rrrrrerr",error);
+                }
+                else{
+                    console.log("resultat",resultat);
+                }
+
+        })
+    }
+   
+    static verifiApikey = (don)=>{
+        return new Promise((resolve,reject)=>{
+            connect.query("select * from users where apikey_user = ?",[don],(error,resultat)=>{
+                if(error){
+                    reject(error)
+                }
+                else{
+                    resolve(resultat)
+                }
+
+            })
+        })
+
     }
    
 }

@@ -1,10 +1,11 @@
 var express = require('express');
-const usercont = require('../controller/usercontrol');
+const control = require('../controller/controlle');
+// const usercont = require('../controller/usercontrol');
 var router = express.Router();
 
 
 /* GET users listing. */
-router.post('/',usercont.utilisateur) 
+// router.post('/',usercont.utilisateur) 
   
 
 
